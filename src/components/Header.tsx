@@ -1,34 +1,39 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { Group, Box, Button } from '@mantine/core';
-import Logo  from "../assets/logo.svg";
-import { useCart } from '../hooks/useCart';
-import { useState } from 'react';
-import { CartPopup } from './CartPopup';
+import { Group, Box, Text, Button } from "@mantine/core";
+import { useState } from "react";
+import { CartPopup } from "./CartPopup";
+import { useCart } from "../hooks/useCart";
+import classes from './Header.module.css'
 
-export const Header = () => {
-  const { totalItems, totalPrice } = useCart();
+export function Header() {
+  const { totalCount, totalPrice } = useCart();
   const [opened, setOpened] = useState(false);
 
   return (
     <Box
       px="md"
-      h={60}
       style={{
         position: 'sticky',
         top: 0,
         zIndex: 10,
         backgroundColor: 'white',
-        borderBottom: '1px solid #e9ecef',
       }}
     >
-      <Group justify="space-between" style={{ height: '100%' }}>
-        <img src={Logo} alt="Логотип" style={{ height: 33 }} />
-        <Button color="primary.6" onClick={() => setOpened(true)}>
-          Cart ({totalItems}) – ${totalPrice.toFixed(2)}
-        </Button>
+      <Group
+        py="sm"
+        justify="space-between"
+        bg="white"
+      >
+        <Text className={classes.title} fw={600} size="xl">
+          Vegetable <span className={classes.highlight}>SHOP</span>
+        </Text>
+        <Group>
+          <Button color="buttons.6" onClick={() => setOpened((o) => !o)}>
+            Cart ({totalCount}) – ${totalPrice}
+          </Button>
+        </Group>
       </Group>
-
-      <CartPopup opened={opened} onClose={() => setOpened(false)} />
+      {opened && <CartPopup />}
     </Box>
   );
-};
+}

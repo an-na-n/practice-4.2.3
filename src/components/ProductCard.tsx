@@ -1,53 +1,66 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { useState } from 'react';
-import { Card, Image, Text, Button, Group, NumberInput } from '@mantine/core';
-import type { Product } from '../types/product';
+import { Card, Image, Text, Input, Group, Button } from "@mantine/core";
+import { useState } from "react";
+import { useCart } from "../hooks/useCart";
+import type { Product } from "../types/types";
 
-interface Props {
-  product: Product;
-  onAddToCart: (p: Product, q: number) => void;
-}
-
-export const ProductCard = ({ product, onAddToCart }: Props) => {
+export function ProductCard({ product }: { product: Product }) {
   const [qty, setQty] = useState(1);
+  const { addToCart } = useCart();
+
+  const handleIncrement = () => setQty(q => q + 1);
+  const handleDecrement = () => setQty(q => Math.max(0, q - 1));
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value);
+    if (!isNaN(value) && value >= 0) {
+      setQty(value);
+    }
+  };
+
+  const [name, weight] = product.name.split(' - ');
 
   return (
-    <Card shadow="sm" padding="lg" withBorder>
+    <Card
+      padding="lg"
+      radius="lg"
+    >
       <Card.Section>
-        <Image src={product.image} height={160} alt={product.name} />
+        <Image
+          src={product.image}
+          alt={product.name}
+          height={276}
+          fit="contain"
+        />
       </Card.Section>
-
-      <Group justify="space-between" mt="md" mb="xs">
-        <Text fw={500}>{product.name}</Text>
-        <Text color="green" fw={700}>${product.price}</Text>
+      <Group justify="space-between" mt="md">
+        <Text fw={500}>{name}</Text>
+            {weight && <Text>{weight}</Text>}
+        <Button color="main.4" autoContrast
+              onClick={handleDecrement}
+              disabled={qty <= 0}
+            >
+            -
+        </Button>
+        <Input
+            type="number"
+            value={qty}
+            onChange={handleInputChange}
+            min={0}
+            max={99}
+          /> 
+          <Button color="main.4" autoContrast
+            onClick={handleIncrement}
+          >
+            +
+          </Button>
       </Group>
-
-      <NumberInput
-        value={qty}
-        min={1}
-        onChange={(val) => setQty(Number(val))}
-      />
-
-      <Button color='secondary.1' fullWidth mt="md"
-        styles={(theme) => ({
-            root: {
-                backgroundColor: theme.colors.secondary[1], 
-                color: theme.colors.primary[6],            
-                fontWeight: 700,
-                '&:hover': {
-                    backgroundColor: theme.colors.secondary[2], 
-                    outline: 'none',
-
-                },
-                '&:focus': {
-                    outline: 'none',
-                    boxShadow: 'none',
-                },
-            }
-        })}
-      onClick={() => onAddToCart(product, qty)}>
-        Add to cart
-      </Button>
+      <Group mt="md">
+        <Text>${product.price}</Text>
+        <Button color="buttons.6" variant="light" onClick={() => addToCart(product, qty)} size="sm">
+          Add to cart
+        </Button>
+      </Group>
     </Card>
   );
-};
+}

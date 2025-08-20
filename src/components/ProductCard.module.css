@@ -1,0 +1,12 @@
+.card {
+  border-radius: 24px;
+  padding: 16px;
+}
+
+.image {
+  max-width: 276px;
+}
+
+.card .group {
+  color: var(--mantine-color-main-10);
+}
