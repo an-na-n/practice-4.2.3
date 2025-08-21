@@ -1,12 +1,80 @@
 .card {
-  border-radius: 24px;
-  padding: 16px;
-}
-
-.image {
-  max-width: 276px;
+  --paper-radius: var(--mantine-radius-lg);
+  --card-padding: var(--mantine-spacing-md);
+  max-width: 302px;
+  gap: 0;
 }
 
 .card .group {
   color: var(--mantine-color-main-10);
+}
+
+.image {
+  max-width: 276px;
+  object-fit: contain;
+}
+
+.group {
+  gap: 0;
+}
+
+.title {
+  margin-right: 12px;
+  font-weight: 600;
+  font-size: var(--mantine-font-size-md);
+  color: var(--mantine-color-main-10);
+}
+
+.weight {
+  margin-right: auto;
+  font-family: var(--mantine-font-family-headings);
+  font-weight: 600;
+  font-size: var(--mantine-font-size-xs);
+  color: var(--mantine-color-main-7);
+}
+
+.group-action {
+  gap: 12px;
+}
+
+.action {
+  text-align: center;
+  justify-content: space-between;
+  padding: 1px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: var(--mantine-color-main-3);
+  border-radius: 8px;
+}
+
+.action-text {
+  font-size: var(--mantine-font-size-sm);
+}
+
+.input {
+  width: 30px;
+  height: 30px;
+  font-size: var(--mantine-font-size-md);
+  font-weight: 400;
+}
+
+.input input {
+  text-align: center;
+  padding: 0;
+  border: none;
+  height: 100%;
+  min-width: 30px;
+  min-height: 30px;
+}
+
+.price {
+  margin-right: auto;
+  font-weight: var(--mantine-radius-lg);
+}
+
+.add-button {
+  padding: 13px 43px;
+  min-height: 44px;
+  font-size: var(--mantine-font-size-sm);
 }

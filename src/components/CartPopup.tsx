@@ -1,22 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable react/react-in-jsx-scope */
-import { Paper, Group, Text, Input, Image, Button, Stack } from "@mantine/core";
+import { Paper, Group, Text, ActionIcon, Image, Stack } from "@mantine/core";
 import { useCart } from "../hooks/useCart";
-import { useState } from "react";
+import { IconMinus, IconPlus } from "@tabler/icons-react";
 
 export function CartPopup() {
-  const { items, totalPrice } = useCart();
-
-  const [qty, setQty] = useState(1);
-
-  const handleIncrement = () => setQty(q => q + 1);
-  const handleDecrement = () => setQty(q => Math.max(0, q - 1));
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value);
-    if (!isNaN(value) && value >= 0) {
-      setQty(value);
-    }
-  };
+  const { items, totalPrice, increaseQuantity,
+    decreaseQuantity, } = useCart();
 
   return (
     <Paper
@@ -37,33 +27,35 @@ export function CartPopup() {
           <Text>No items in cart</Text>
         ) : (
           items.map((i) => (
-            <Group key={i.id} justify="space-between">
+            <Group key={i.id}>
               <Image
                 src={i.image}
                 alt={i.name.split(' - ')[0]}
                 height={64}
                 fit="contain"
               />
-              <Text fw={500}>{i.name.split(' - ')[0]}</Text>
-              <Text>{i.name.split(' - ')[1]}</Text>
-              <Button color="main.4" autoContrast
-                            onClick={handleDecrement}
-                            disabled={qty <= 0}
-                          >
-                          -
-                      </Button>
-                      <Input
-                          type="number"
-                          value={qty}
-                          onChange={handleInputChange}
-                          min={0}
-                          max={99}
-                        /> 
-                        <Button color="main.4" autoContrast
-                          onClick={handleIncrement}
-                        >
-                          +
-                        </Button>
+              <Group>
+                <Text fw={500}>{i.name.split(' - ')[0]}</Text>
+                <Text>{i.name.split(' - ')[1]}</Text>
+                <Text>
+                    ${(i.price * i.quantity).toFixed(2)}
+                </Text>
+              </Group>
+              <ActionIcon
+                    onClick={() => decreaseQuantity(i.id)}
+                    variant="default"
+                    size="sm"
+                  >
+                    <IconMinus size={14} />
+                  </ActionIcon>
+                  <Text>{i.quantity}</Text>
+                  <ActionIcon
+                    onClick={() => increaseQuantity(i.id)}
+                    variant="default"
+                    size="sm"
+                  >
+                    <IconPlus size={14} />
+                  </ActionIcon>
             </Group>
           ))
         )}

@@ -16,3 +16,8 @@
   color: white;
   border-radius: 31px;
 }
+
+.button {
+  padding: 13px 40px;
+  min-height: 44px;
+}

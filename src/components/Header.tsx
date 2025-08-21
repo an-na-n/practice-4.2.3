@@ -2,11 +2,10 @@
 import { Group, Box, Text, Button } from "@mantine/core";
 import { useState } from "react";
 import { CartPopup } from "./CartPopup";
-import { useCart } from "../hooks/useCart";
 import classes from './Header.module.css'
+import CartIcon from "../assets/white_cart.svg"
 
 export function Header() {
-  const { totalCount, totalPrice } = useCart();
   const [opened, setOpened] = useState(false);
 
   return (
@@ -28,8 +27,8 @@ export function Header() {
           Vegetable <span className={classes.highlight}>SHOP</span>
         </Text>
         <Group>
-          <Button color="buttons.6" onClick={() => setOpened((o) => !o)}>
-            Cart ({totalCount}) – ${totalPrice}
+          <Button className={classes.button} rightSection={<img src={CartIcon} />} color="buttons.6" onClick={() => setOpened((o) => !o)}>
+            Cart
           </Button>
         </Group>
       </Group>

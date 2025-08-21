@@ -1,10 +1,11 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useState } from "react";
-import { Container, Loader, SimpleGrid } from "@mantine/core";
+import { Container, Loader, SimpleGrid, Title } from "@mantine/core";
 import { ProductCard } from "../components/ProductCard";
 import { Header } from "../components/Header";
 import { CartProvider } from "../hooks/useCart";
 import type { Product } from "../types/types";
+import classes from "./App.module.css"
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -24,11 +25,12 @@ function App() {
   return (
     <CartProvider>
       <Header />
-      <Container py="md">
+      <Container className={classes.container}>
+        <Title className={classes.title} order={1}>Catalog</Title>
         {loading ? (
           <Loader size="xl" />
         ) : (
-          <SimpleGrid cols={4} spacing="lg">
+          <SimpleGrid className={classes.grid} cols={4}>
             {products.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}

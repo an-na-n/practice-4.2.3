@@ -1,23 +1,28 @@
-import React, { createContext, useContext, useState, type ReactNode } from "react";
-import type { Product } from "../types/types";
+/* eslint-disable react/react-in-jsx-scope */
+import { createContext, useContext, useState, type ReactNode } from "react";
 
-export type CartItem = Product & { quantity: number };
+export type Product = {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+};
+
+type CartItem = Product & { quantity: number };
 
 type CartContextType = {
   items: CartItem[];
   addToCart: (product: Product, quantity?: number) => void;
   removeFromCart: (id: number) => void;
+  increaseQuantity: (id: number) => void;
+  decreaseQuantity: (id: number) => void;
   totalCount: number;
   totalPrice: number;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-type CartProviderProps = {
-  children: ReactNode;
-};
-
-export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
+export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState<CartItem[]>([]);
 
   const addToCart = (product: Product, quantity: number = 1) => {
@@ -36,22 +41,46 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     setItems((prev) => prev.filter((i) => i.id !== id));
   };
 
-  const totalCount = items.reduce((sum, i) => sum + i.quantity, 0);
-  const totalPrice = items.reduce((sum, i) => sum + i.quantity * i.price, 0);
+  const increaseQuantity = (id: number) => {
+    setItems((prev) =>
+      prev.map((i) =>
+        i.id === id ? { ...i, quantity: i.quantity + 1 } : i
+      )
+    );
+  };
+
+  const decreaseQuantity = (id: number) => {
+    setItems((prev) =>
+      prev
+        .map((i) =>
+          i.id === id ? { ...i, quantity: i.quantity - 1 } : i
+        )
+        .filter((i) => i.quantity > 0)
+    );
+  };
+
+  const totalCount = items.reduce((acc, i) => acc + i.quantity, 0);
+  const totalPrice = items.reduce((acc, i) => acc + i.quantity * i.price, 0);
 
   return (
     <CartContext.Provider
-      value={{ items, addToCart, removeFromCart, totalCount, totalPrice }}
+      value={{
+        items,
+        addToCart,
+        removeFromCart,
+        increaseQuantity,
+        decreaseQuantity,
+        totalCount,
+        totalPrice,
+      }}
     >
       {children}
     </CartContext.Provider>
   );
 };
 
-export const useCart = (): CartContextType => {
-  const context = useContext(CartContext);
-  if (!context) {
-    throw new Error("useCart must be used within a CartProvider");
-  }
-  return context;
+export const useCart = () => {
+  const ctx = useContext(CartContext);
+  if (!ctx) throw new Error("useCart must be used within CartProvider");
+  return ctx;
 };

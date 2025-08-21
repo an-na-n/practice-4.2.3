@@ -32,4 +32,17 @@ export const theme = createTheme({
     buttons,
     main,
   },
+  fontFamily: "Inter, sans-serif",
+  headings: {
+    fontFamily: "Open Sans, sans-serif",
+    fontWeight: "600",
+  },
+  fontSizes: {
+    xs: "14px",
+    sm: "16px",
+    md: "18px",
+    lg: "20px",
+    xl: "22px",
+    xxl: "32px"
+  },
 });
