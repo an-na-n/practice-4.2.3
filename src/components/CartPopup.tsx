@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable react/react-in-jsx-scope */
 import { Paper, Group, Text, ActionIcon, Image, Stack } from "@mantine/core";
 import { useCart } from "../hooks/useCart";
