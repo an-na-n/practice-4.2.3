@@ -2,13 +2,14 @@
 import { Paper, Group, Text, ActionIcon, Image, Stack } from "@mantine/core";
 import { useCart } from "../hooks/useCart";
 import { IconMinus, IconPlus } from "@tabler/icons-react";
+import classes from "./CartPopup.module.css"
 
 export function CartPopup() {
   const { items, totalPrice, increaseQuantity,
     decreaseQuantity, } = useCart();
 
   return (
-    <Paper
+    <Paper className={classes.container}
       shadow="md"
       p="md"
       withBorder

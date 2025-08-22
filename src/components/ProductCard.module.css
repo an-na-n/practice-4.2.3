@@ -48,6 +48,11 @@
   border-radius: 8px;
 }
 
+.action:hover {
+  color: var(--mantine-color-main-6);
+  background-color: var(--mantine-color-main-3);
+}
+
 .action-text {
   font-size: var(--mantine-font-size-sm);
 }
