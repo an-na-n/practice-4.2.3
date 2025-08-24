@@ -1,5 +1,5 @@
 import { createTheme, type MantineColorsTuple, Loader} from '@mantine/core';
-import { CustomLoader }  from "./assets/CustomLoader"
+import { CustomLoader }  from "./shared/CustomLoader"
 
 const buttons: MantineColorsTuple = [
   '#e7faeb',

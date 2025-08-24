@@ -6,12 +6,13 @@ import classes from "./CartPopup.module.css";
 import CartEmpty from "../assets/cart_empty.svg";
 import clsx from "clsx";
 
-export function CartPopup() {
+export function CartPopup () {
   const { items, totalPrice, increaseQuantity,
     decreaseQuantity, } = useCart();
 
   return (
-    <Paper className={classes.paper}
+    <Paper
+      className={classes.paper}
       style={{
         position: "absolute",
         top: 60,
@@ -47,7 +48,8 @@ export function CartPopup() {
                   </Text>
                 </Group>
                 <Group className={clsx(classes.group, classes["action-group"])}>
-                <ActionIcon className={classes.action}
+                <ActionIcon
+                  className={classes.action}
                   onClick={() => decreaseQuantity(i.id)}
                   variant="default"
                   size="sm"
@@ -55,7 +57,8 @@ export function CartPopup() {
                   <IconMinus size={14} />
                 </ActionIcon>
                 <Text className={classes["action-text"]}>{i.quantity}</Text>
-                <ActionIcon className={classes.action}
+                <ActionIcon
+                  className={classes.action}
                   onClick={() => increaseQuantity(i.id)}
                   variant="default"
                   size="sm"

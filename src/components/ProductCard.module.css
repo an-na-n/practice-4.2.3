@@ -5,13 +5,14 @@
   gap: 0;
 }
 
-.card .group {
-  color: var(--mantine-color-main-10);
-}
-
 .image {
   max-width: 276px;
+  min-height: 276px;
   object-fit: contain;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 16px;
+  padding-top: 16px;
 }
 
 .group {
@@ -22,7 +23,7 @@
   margin-right: 12px;
   font-weight: 600;
   font-size: var(--mantine-font-size-md);
-  color: var(--mantine-color-main-10);
+  color: #212529;
 }
 
 .weight {
@@ -30,7 +31,7 @@
   font-family: var(--mantine-font-family-headings);
   font-weight: 600;
   font-size: var(--mantine-font-size-xs);
-  color: var(--mantine-color-main-7);
+  color: var(--mantine-color-main-6);
 }
 
 .group-action {
@@ -57,9 +58,14 @@
   font-size: var(--mantine-font-size-sm);
 }
 
+.price-add-group {
+  margin-top: 16px;
+}
+
 .price {
   margin-right: auto;
   font-weight: var(--mantine-radius-lg);
+  color: #212529;
 }
 
 .add-button {

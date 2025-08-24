@@ -6,7 +6,7 @@ import type { Product } from "../types/types";
 import classes from "./ProductCard.module.css";
 import clsx from "clsx";
 import { IconMinus, IconPlus } from "@tabler/icons-react";
-import CartIcon from "../assets/cart.svg"
+import CartIcon from "../assets/cart_icon.svg?react";
 
 export function ProductCard({ product }: { product: Product }) {
   const [qty, setQty] = useState(1);
@@ -29,36 +29,50 @@ export function ProductCard({ product }: { product: Product }) {
             {weight && <Text className={classes.weight}>{weight}</Text>}
          {!inCart ? (
           <Group className={clsx(classes.group, classes["group-action"])}>
-        <ActionIcon className={classes.action}
-            onClick={() => setQty((q) => Math.max(1, q - 1))}
-            variant="default"
+        <ActionIcon
+          className={classes.action}
+          onClick={() => setQty((q) => Math.max(1, q - 1))}
+          variant="default"
           >
-            <IconMinus size={14} />
+          <IconMinus size={14} />
           </ActionIcon>
           <Text className={classes["action-text"]}>{qty}</Text>
-          <ActionIcon className={classes.action}
+          <ActionIcon
+            className={classes.action}
             onClick={() => setQty((q) => q + 1)}
             variant="default"
           >
-            <IconPlus size={14} />
+          <IconPlus size={14} />
           </ActionIcon>
           </Group>
            ) : (
             <Group className={clsx(classes.group, classes["group-action"])}>
-            <ActionIcon className={classes.action} onClick={() => decreaseQuantity(product.id)} variant="default">
+              <ActionIcon
+                className={classes.action}
+                onClick={() => decreaseQuantity(product.id)}
+                variant="default">
               <IconMinus size={14} />
-            </ActionIcon>
-            <Text className={classes["action-text"]}>{inCart.quantity}</Text>
-            <ActionIcon className={classes.action} onClick={() => increaseQuantity(product.id)} variant="default">
+              </ActionIcon>
+              <Text className={classes["action-text"]}>{inCart.quantity}</Text>
+              <ActionIcon
+                className={classes.action}
+                onClick={() => increaseQuantity(product.id)}
+                variant="default">
               <IconPlus size={14} />
-            </ActionIcon>
+              </ActionIcon>
             </Group>
             )}
       </Group>
-      <Group className={classes.group} mt="md">
+      <Group className={clsx(classes.group, classes["price-add-group"])}>
         <Text className={classes.price}>${product.price}</Text>
-        <Button rightSection={<img src={CartIcon}/>} className={classes["add-button"]} color="buttons.6" c="buttons.8" variant="light" onClick={() => addToCart(product, qty)} size="sm">
-          Add to cart
+        <Button
+          rightSection={<CartIcon className={classes["cart-icon"]} />}
+          className={classes["add-button"]}
+          color="buttons.6"
+          c="buttons.8"
+          variant="light"
+          onClick={(() => {addToCart(product, qty)})}>
+            Add to cart
         </Button>
       </Group>
     </Card>

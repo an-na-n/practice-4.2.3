@@ -25,6 +25,7 @@
 body {
   font-family: var(--mantine-font-family);
   background-color: var(--mantine-color-main-2);
+  color: var(--mantine-color-main-10);
   font-weight: 600;
 }
 

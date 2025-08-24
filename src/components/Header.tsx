@@ -4,7 +4,7 @@ import { useState } from "react";
 import { CartPopup } from "./CartPopup";
 import { useCart } from "../hooks/useCart";
 import classes from './Header.module.css'
-import CartIcon from "../assets/white_cart.svg"
+import CartIcon from "../assets/cart_icon.svg?react"
 
 export function Header() {
   const [opened, setOpened] = useState(false);
@@ -30,7 +30,7 @@ export function Header() {
           Vegetable <span className={classes.highlight}>SHOP</span>
         </Text>
         <Group>
-          <Button className={classes.button} rightSection={<img src={CartIcon} />} color="buttons.6" onClick={() => setOpened((o) => !o)}
+          <Button className={classes.button} rightSection={<CartIcon />} color="buttons.6" onClick={() => setOpened((o) => !o)}
           leftSection={totalQuantity > 0 ? (
             <span className={classes.badge}>{totalQuantity}</span>
           ) : null}

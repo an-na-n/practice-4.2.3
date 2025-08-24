@@ -60,6 +60,7 @@
   margin-bottom: 4px;
   font-size: var(--mantine-font-size-md);
   font-weight: 600;
+  color: #212529;
 }
 
 .weight {
@@ -72,6 +73,7 @@
 .price {
   font-size: var(--mantine-font-size-lg);
   font-weight: 600;
+  color: #212529;
 }
 
 .action-group {
@@ -115,8 +117,10 @@
   padding-top: 12px;
   font-size: var(--mantine-font-size-sm);
   font-weight: 600;
+  color: #212529;
 }
 
 .total-price {
   margin-left: auto;
+  color: #212529;
 }
