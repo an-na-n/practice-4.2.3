@@ -5,7 +5,7 @@ import classes from "./ProductCardSkeleton.module.css";
 export const ProductCardSkeleton = () => {
   return (
     <Card className={classes.card} >
-      <Skeleton className={classes.image} mb="sm" bg="main.2" visible={false} >
+      <Skeleton className={classes.image} visible={false} >
         <Loader className={classes.loader} />
     </Skeleton>
     </Card>

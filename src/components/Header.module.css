@@ -1,9 +1,23 @@
+.box {
+  position: sticky;
+  padding: 8px 20px;
+  top: 0;
+  background-color: white;
+  z-index: 10;
+}
+
+.group {
+  padding: 0;
+  justify-content: space-between;
+}
+
 .title {
   text-align: center;
   padding-left: 12px;
   background: var(--mantine-color-main-2);
   border-radius: 31px;
-  font-size: 22px;
+  font-size: (--mantine-font-size-xxl);
+  font-weight: 600;
 }
 
 .highlight {

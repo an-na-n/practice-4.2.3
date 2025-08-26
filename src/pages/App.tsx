@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Container, SimpleGrid, Title } from "@mantine/core";
 import { ProductCard } from "../components/ProductCard";
-import { ProductCardSkeleton } from "../ProductCardSkeleton";
+import { ProductCardSkeleton } from "../components/skeletons/ProductCardSkeleton";
 import { Header } from "../components/Header";
 import { CartProvider } from "../hooks/useCart";
 import type { Product } from "../types/types";
@@ -27,7 +27,12 @@ function App() {
     <CartProvider>
       <Header />
       <Container className={classes.container}>
-        <Title className={classes.title} order={1}>Catalog</Title>
+        <Title
+          data-testid="title"
+          className={classes.title}
+          order={1}>
+            Catalog
+        </Title>
           <SimpleGrid className={classes.grid} cols={4}>
             {loading
         ? Array.from({ length: 8 }).map((_, i) => <ProductCardSkeleton key={i} />)

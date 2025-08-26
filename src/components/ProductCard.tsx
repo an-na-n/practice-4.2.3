@@ -5,7 +5,8 @@ import { useCart } from "../hooks/useCart";
 import type { Product } from "../types/types";
 import classes from "./ProductCard.module.css";
 import clsx from "clsx";
-import { IconMinus, IconPlus } from "@tabler/icons-react";
+import IconMinus from "../assets/minus.svg?react";
+import IconPlus from "../assets/plus.svg?react";
 import CartIcon from "../assets/cart_icon.svg?react";
 
 export function ProductCard({ product }: { product: Product }) {
@@ -19,53 +20,60 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <Card className={classes.card}>
       <Card.Section>
-        <Image className={classes.image}
+        <Image
+          data-testid="card-image"
+          className={classes.image}
           src={product.image}
           alt={product.name}
         />
       </Card.Section>
       <Group className={classes.group}>
-        <Text className={classes.title}>{name}</Text>
-            {weight && <Text className={classes.weight}>{weight}</Text>}
+        <Text data-testid="product-name" className={classes.title}>{name}</Text>
+            {weight && <Text data-testid="product-weight" className={classes.weight}>{weight}</Text>}
          {!inCart ? (
           <Group className={clsx(classes.group, classes["group-action"])}>
         <ActionIcon
+          data-testid="minus-action-button"
           className={classes.action}
           onClick={() => setQty((q) => Math.max(1, q - 1))}
           variant="default"
           >
-          <IconMinus size={14} />
+          <IconMinus />
           </ActionIcon>
-          <Text className={classes["action-text"]}>{qty}</Text>
+          <Text data-testid="quantity-text" className={classes["action-text"]}>{qty}</Text>
           <ActionIcon
+            data-testid="plus-action-button"
             className={classes.action}
             onClick={() => setQty((q) => q + 1)}
             variant="default"
           >
-          <IconPlus size={14} />
+          <IconPlus />
           </ActionIcon>
           </Group>
            ) : (
             <Group className={clsx(classes.group, classes["group-action"])}>
               <ActionIcon
+                data-testid="minus-action-button"
                 className={classes.action}
                 onClick={() => decreaseQuantity(product.id)}
                 variant="default">
-              <IconMinus size={14} />
+              <IconMinus />
               </ActionIcon>
-              <Text className={classes["action-text"]}>{inCart.quantity}</Text>
+              <Text data-testid="quantity-text" className={classes["action-text"]}>{inCart.quantity}</Text>
               <ActionIcon
+                data-testid="plus-action-button"
                 className={classes.action}
                 onClick={() => increaseQuantity(product.id)}
                 variant="default">
-              <IconPlus size={14} />
+              <IconPlus />
               </ActionIcon>
             </Group>
             )}
       </Group>
       <Group className={clsx(classes.group, classes["price-add-group"])}>
-        <Text className={classes.price}>${product.price}</Text>
+        <Text data-testid="product-price" className={classes.price}>${product.price}</Text>
         <Button
+          data-testid="add-button"
           rightSection={<CartIcon className={classes["cart-icon"]} />}
           className={classes["add-button"]}
           color="buttons.6"

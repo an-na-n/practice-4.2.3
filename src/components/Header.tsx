@@ -12,28 +12,21 @@ export function Header() {
   const totalQuantity = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <Box
-      px="md"
-      style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 10,
-        backgroundColor: 'white',
-      }}
-    >
-      <Group
-        py="sm"
-        justify="space-between"
-        bg="white"
-      >
-        <Text className={classes.title} fw={600} size="xl">
+    <Box className={classes.box}>
+      <Group className={classes.group}>
+        <Text className={classes.title}>
           Vegetable <span className={classes.highlight}>SHOP</span>
         </Text>
         <Group>
-          <Button className={classes.button} rightSection={<CartIcon />} color="buttons.6" onClick={() => setOpened((o) => !o)}
-          leftSection={totalQuantity > 0 ? (
-            <span className={classes.badge}>{totalQuantity}</span>
+          <Button
+            data-testid="cart-button"
+            className={classes.button}
+            leftSection={totalQuantity > 0 ? (
+            <span data-testid="quantity" className={classes.badge}>{totalQuantity}</span>
           ) : null}
+            rightSection={<CartIcon />}
+            color="buttons.6"
+            onClick={() => setOpened((o) => !o)}
           >
               Cart
           </Button>
